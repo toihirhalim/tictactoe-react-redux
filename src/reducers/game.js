@@ -1,6 +1,7 @@
 const game = {
     board: ['', '', '', '', '', '', '', '', ''],
-    player: 'x'
+    player: 'x',
+    lastMove: -1
 }
 
 const gameReducer = (state = game, action) => {
@@ -14,7 +15,8 @@ const gameReducer = (state = game, action) => {
                     state.player,
                     ...state.board.slice(action.pos + 1, state.length)
                 ],
-                player: state.player === 'x' ? 'o' : 'x'
+                player: state.player === 'x' ? 'o' : 'x',
+                lastMove: action.pos
             }
         case 'SWITCH':
             return {
@@ -24,7 +26,8 @@ const gameReducer = (state = game, action) => {
         case 'RESET':
             return {
                 ...state,
-                board: game.board
+                board: game.board,
+                lastMove: game.lastMove
             }
         default:
             return state
