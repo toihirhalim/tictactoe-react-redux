@@ -1,14 +1,23 @@
-export const setBoard = board => {
+export const setGame = game => {
     return {
-        type: 'CHANGE',
-        board
+        type: 'SET',
+        game
     }
 }
-export const play = (index, value) => {
+export const play = (pos) => {
     return {
         type: 'PLAY',
-        index,
-        value
+        pos,
+    }
+}
+export const switchPlayer = () => {
+    return {
+        type: 'SWITCH'
+    }
+}
+export const resetGame = () => {
+    return {
+        type: 'RESET'
     }
 }
 

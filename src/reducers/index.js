@@ -1,9 +1,9 @@
-import boardReducer from './board';
+import gameReducer from './game';
 import statisticsReducer from './statistics';
 import { combineReducers } from 'redux';
 
 const allReducers = combineReducers({
-    board: boardReducer,
+    game: gameReducer,
     stats: statisticsReducer,
 })
 
