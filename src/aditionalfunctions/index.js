@@ -29,4 +29,15 @@ export const gameStatus = (board, pos) => {
     return status
 }
 
+export const getEmptyPositions = board => {
+    const positions = []
+
+    board.forEach((arr, x) => {
+        arr.forEach((value, y) => {
+            if (value === '') positions.push({ x, y })
+        })
+    })
+
+    return positions
+}
 
