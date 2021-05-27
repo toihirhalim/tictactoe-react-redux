@@ -21,6 +21,11 @@ export const resetGame = () => {
         type: 'RESET'
     }
 }
+export const gameOver = () => {
+    return {
+        type: 'OVER'
+    }
+}
 
 // statistics actions
 export const setStatistic = (wins, losses, draws) => {

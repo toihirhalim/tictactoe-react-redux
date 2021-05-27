@@ -9,7 +9,8 @@ const game = {
     lastMove: {
         x: -1,
         y: -1,
-    }
+    },
+    isGameOver: false
 }
 
 const gameReducer = (state = game, action) => {
@@ -29,7 +30,13 @@ const gameReducer = (state = game, action) => {
                 ],
                 player: state.player === 'x' ? 'o' : 'x',
                 lastMove: action.pos,
-                movesCount: state.movesCount + 1
+                movesCount: state.movesCount + 1,
+                isGameOver: state.movesCount + 1 === 9
+            }
+        case 'OVER':
+            return {
+                ...state,
+                isGameOver: true
             }
         case 'SWITCH':
             return {
@@ -41,7 +48,8 @@ const gameReducer = (state = game, action) => {
                 ...state,
                 board: game.board,
                 lastMove: game.lastMove,
-                movesCount: game.movesCount
+                movesCount: game.movesCount,
+                isGameOver: game.isGameOver
             }
         default:
             return state

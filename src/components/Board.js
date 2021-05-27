@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Case from './Case'
 import { useSelector, useDispatch } from 'react-redux'
-import { play } from '../actions'
+import { play, gameOver } from '../actions'
 import { gameStatus } from '../aditionalfunctions'
 
 export default function Board() {
     const board = useSelector(state => state.game.board)
     const lastMove = useSelector(state => state.game.lastMove)
     const movesCount = useSelector(state => state.game.movesCount)
+    const isGameOver = useSelector(state => state.game.isGameOver)
     const dispatch = useDispatch()
-    const [status, setStatus] = useState({ result: 'UNKNOWN' })
 
     const playAtPosition = pos => {
-        if (status.result === 'WIN') return
+        if (isGameOver) return
 
         dispatch(play(pos))
     }
 
     useEffect(() => {
         if (movesCount >= 5) {
-            setStatus(gameStatus(board, lastMove))
+            if (gameStatus(board, lastMove).result === 'WIN') {
+                dispatch(gameOver())
+                console.log('game over: ' + board[lastMove.x][lastMove.y] + ' won !!!')
+            } else if (movesCount === 9) {
+                console.log('game over but draw !!!')
+            }
         }
-    }, [movesCount, lastMove, board])
+    }, [movesCount, lastMove, board, dispatch])
 
     return (
         <div className="board">
