@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Case({ index, value, lastplayed, playAtPosition }) {
+export default function Case({ pos, value, lastplayed, playAtPosition }) {
     const handleClick = e => {
         if (value !== '') return
-        playAtPosition(index)
+        playAtPosition(pos)
     }
     return (
         <div className={lastplayed ? "case red-border" : "case"} onClick={handleClick}>
