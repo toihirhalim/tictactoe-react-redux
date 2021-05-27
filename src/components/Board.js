@@ -5,45 +5,44 @@ import { play, gameOver } from '../actions'
 import { gameStatus } from '../aditionalfunctions'
 
 export default function Board() {
-    const board = useSelector(state => state.game.board)
-    const lastMove = useSelector(state => state.game.lastMove)
-    const movesCount = useSelector(state => state.game.movesCount)
-    const isGameOver = useSelector(state => state.game.isGameOver)
+    const game = useSelector(state => state.game)
     const dispatch = useDispatch()
 
     const playAtPosition = pos => {
-        if (isGameOver) return
+        if (game.isGameOver) return
 
         dispatch(play(pos))
     }
 
     useEffect(() => {
-        if (movesCount >= 5) {
-            if (gameStatus(board, lastMove).result === 'WIN') {
+        if (game.movesCount >= 5) {
+            if (gameStatus(game.board, game.lastMove).result === 'WIN') {
                 dispatch(gameOver())
-                console.log('game over: ' + board[lastMove.x][lastMove.y] + ' won !!!')
-            } else if (movesCount === 9) {
+                console.log('game over: ' + game.board[game.lastMove.x][game.lastMove.y] + ' won !!!')
+            } else if (game.movesCount === 9) {
                 console.log('game over but draw !!!')
             }
         }
-    }, [movesCount, lastMove, board, dispatch])
+    }, [game.movesCount, game.board, game.lastMove, dispatch])
 
     return (
         <div className="board">
             {
-                board.map((arr, xKey) => {
+                game.board.map((arr, xKey) => {
                     return arr.map((value, yKey) => {
                         const key = xKey + "," + yKey
                         const pos = { x: xKey, y: yKey }
-                        const lastPlayed = lastMove.x === xKey && lastMove.y === yKey
+                        const lastPlayed = game.lastMove.x === xKey && game.lastMove.y === yKey
 
-                        return (<Case
-                            key={key}
-                            pos={pos}
-                            lastplayed={lastPlayed}
-                            value={value}
-                            playAtPosition={playAtPosition}
-                        />)
+                        return (
+                            <Case
+                                key={key}
+                                pos={pos}
+                                lastplayed={lastPlayed}
+                                value={value}
+                                playAtPosition={playAtPosition}
+                            />
+                        )
                     })
                 })
             }
