@@ -21,7 +21,7 @@ export const gameStatus = (board, pos) => {
     }
 
     //check other diagno win
-    if ((3 - pos.x + pos.y) === 1 && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+    if (3 - pos.x - pos.y === 1 && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
         status.result = 'WIN'
         status.types.push('adiag')
     }
