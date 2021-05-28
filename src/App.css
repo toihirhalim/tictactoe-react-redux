@@ -4,6 +4,8 @@
 
 .title {
   padding: 10px;
+  background-color: blueviolet;
+  color: white;
 }
 
 .board, .case {
@@ -14,11 +16,10 @@
   min-width: 300px;
   width: 50%;
   margin: auto;
-  margin-top: 15px;
 }
 
 .new-game {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .new-game button {
@@ -41,6 +42,50 @@
   text-align: center;
 }
 
-.red-border {
-  border: 2px solid rgb(0, 255, 115);
+.last-played-case {
+  border: 2px solid rgb(57, 31, 207);
+}
+
+.settings {
+  display: flex;
+  height: 85px;
+  width: 300px;
+  margin: 10px auto;
+}
+
+.level {
+  width: 200px;
+  padding: 10px;
+}
+
+.opponent {
+  width: 100px;
+  padding: 10px;
+}
+
+.switch {
+  margin-top: 15px;
+  border: 1px solid black;
+  border-radius: 15%/50%;
+  color: white;
+  background-color: blueviolet;
+  font-size: 14px;
+  display: flex;
+}
+
+.switch:hover, .slider:hover{
+  cursor: pointer;
+}
+
+.switch .value {
+  flex: 1;
+}
+
+.circle {
+  border-radius: 50%;
+  border: 1px solid black;
+  width: 15px;
+  height: 15px;
+  margin: 2px;
+  background-color: #dadada;
 }
