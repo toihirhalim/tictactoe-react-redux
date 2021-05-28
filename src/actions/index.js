@@ -58,3 +58,33 @@ export const drawGame = () => {
         type: 'DRAW',
     }
 }
+
+// is humain playing actions
+export const playWithHumain = () => {
+    return {
+        type: 'HUMAIN'
+    }
+}
+
+export const playWithAi = () => {
+    return {
+        type: 'AI'
+    }
+}
+
+// ai level actions
+export const aiPlayDumb = () => {
+    return {
+        type: 'DUMB'
+    }
+}
+export const aiPlayMedium = () => {
+    return {
+        type: 'MEDIUM',
+    }
+}
+export const aiPlayHard = () => {
+    return {
+        type: 'HARD'
+    }
+}
