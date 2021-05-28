@@ -2,9 +2,9 @@ const levelReduicer = (state = 1, action) => {
     switch (action.type) {
         case 'DUMB':
             return 0
-        case 'MEDUIM':
+        case 'MEDIUM':
             return 1
-        case 'HIGH':
+        case 'HARD':
             return 2
         default:
             return state

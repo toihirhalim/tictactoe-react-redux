@@ -6,7 +6,7 @@ export default function Case({ pos, value, lastplayed, playAtPosition }) {
         playAtPosition(pos)
     }
     return (
-        <div className={lastplayed ? "case red-border" : "case"} onClick={handleClick}>
+        <div className={lastplayed ? "case last-played-case" : "case"} onClick={handleClick}>
             <p>{value}</p>
         </div>
     )
