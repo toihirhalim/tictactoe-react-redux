@@ -20,7 +20,7 @@ export default function GameBarHeader({ wins, losses, draws }) {
             {
                 losses !== 0 &&
                 <div className="losses" style={{ flex: losses }}>
-                    <p>{draws}</p>
+                    <p>{losses}</p>
                 </div>
             }
 
