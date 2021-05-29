@@ -18,7 +18,7 @@ export default function Board() {
         if (game.movesCount >= 5) {
             if (gameStatus(game.board, game.lastMove).result === 'WIN') {
                 dispatch(gameOver())
-                console.log('game over: ' + game.board[game.lastMove.x][game.lastMove.y] + ' won !!!')
+
                 if (game.board[game.lastMove.x][game.lastMove.y] === 'x') {
                     dispatch(wonGame())
                 } else {
@@ -26,7 +26,6 @@ export default function Board() {
                 }
 
             } else if (game.movesCount === 9) {
-                console.log('game over but draw !!!')
                 dispatch(drawGame())
             }
         }

@@ -3,6 +3,7 @@ import Board from './Board'
 import { useDispatch } from 'react-redux'
 import { resetGame } from '../actions'
 import Settings from './Settings'
+import Statistics from './Statistics'
 
 export default function Game() {
     const dispatch = useDispatch()
@@ -14,6 +15,7 @@ export default function Game() {
             <div className="new-game">
                 <button onClick={e => dispatch(resetGame())}>New Game</button>
             </div>
+            <Statistics />
         </div>
     )
 }
