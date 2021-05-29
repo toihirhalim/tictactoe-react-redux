@@ -5,7 +5,7 @@ import 'react-rangeslider/lib/index.css'
 import { aiPlayDumb, aiPlayMedium, aiPlayHard } from '../actions'
 
 export default function Level() {
-    const [level, setLevel] = useState(useSelector(state => state.level * 100))
+    const [level, setLevel] = useState(useSelector(state => state.level))
     const dispatch = useDispatch()
 
     const labels = {
