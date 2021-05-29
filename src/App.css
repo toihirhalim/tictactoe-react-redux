@@ -36,10 +36,20 @@
 }
 
 .case {
-  font-size: 50px;
+  font-size: 70px;
   width: 100px;
   height: 100px;
-  text-align: center;
+}
+
+.case p {
+  transform: translateY(-10px);
+}
+
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
 }
 
 .last-played-case {
