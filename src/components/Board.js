@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Case from './Case'
 import { useSelector, useDispatch } from 'react-redux'
 import { play, gameOver, wonGame, lostGame, drawGame } from '../actions'
-import { gameStatus, aiPlays, AiLevel } from '../aditionalfunctions'
+import { gameStatus, aiPlays } from '../aditionalfunctions'
 
 export default function Board() {
     const game = useSelector(state => state.game)
@@ -16,18 +16,8 @@ export default function Board() {
         dispatch(play(pos))
     }
 
-    const aiTurn = () => {
-        if (isAiPlaying && game.player === 'o') {
-            const pos = aiPlays(game.board, level)
-            if (pos) {
-                setTimeout(() => {
-                    dispatch(play(pos))
-                }, 500);
-            }
-        }
-    }
-
     useEffect(() => {
+        if (game.gameIsOver) return
         let gameIsOver = false
         if (game.movesCount >= 5) {
             if (gameStatus(game.board, game.lastMove).result === 'WIN') {
@@ -45,9 +35,16 @@ export default function Board() {
             }
         }
 
-        if (!gameIsOver) aiTurn()
+        if (!gameIsOver && isAiPlaying && game.player === 'o') {
+            const pos = aiPlays(game.board, level)
+            if (pos) {
+                setTimeout(() => {
+                    dispatch(play(pos))
+                }, 500);
+            }
+        }
 
-    }, [game.player, game.movesCount, game.board, game.lastMove, dispatch, isAiPlaying])
+    }, [game.gameIsOver, game.player, game.movesCount, game.board, game.lastMove, isAiPlaying, level, dispatch])
 
     return (
         <div className="board">
