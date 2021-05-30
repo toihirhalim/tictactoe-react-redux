@@ -75,7 +75,6 @@
 
 .switch {
   margin-top: 15px;
-  border: 1px solid black;
   border-radius: 15%/50%;
   color: white;
   background-color: blueviolet;
@@ -93,9 +92,9 @@
 
 .circle {
   border-radius: 50%;
-  border: 1px solid black;
   width: 15px;
   height: 15px;
-  margin: 2px;
+  margin: 3px;
+  
   background-color: #dadada;
 }
