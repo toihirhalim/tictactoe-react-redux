@@ -18,6 +18,10 @@
   margin: auto;
 }
 
+.bold{
+  font-weight: bold;
+}
+
 .new-game {
   margin-top: 10px;
 }
@@ -97,4 +101,85 @@
   margin: 3px;
   
   background-color: #dadada;
+}
+
+.statistics {
+  width: 300px;
+  margin: 10px auto;
+}
+
+.statistics .general {
+  display: flex;
+  font-size: 25px;
+  justify-content: space-between;
+}
+.statistics .general .infos {
+  display: flex;
+}
+.statistics .general .infos .rating,
+.statistics .general .infos .games
+{
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.statistics .general .infos .rating {
+  color: green;
+}
+
+.statistics .general .infos .games{
+  color: blueviolet;
+}
+
+.game-bar {
+  margin-top: 10px;
+}
+
+.game-bar .default {
+  justify-content: space-between;
+  font-size: 22px;
+}
+
+.game-bar .header, .game-bar .footer,
+.game-bar .wins, .game-bar .draws,
+.game-bar .losses, .game-bar .default {
+  display: flex;
+}
+
+.game-bar .wins {
+  color: #85a94e;
+}
+.game-bar .draws {
+  color: #8a8886;
+}
+.game-bar .losses {
+  color: #b33430;
+}
+
+.tricolor-bar {
+  height: 10px;
+  border-radius: 2%/50%;
+  display: flex;
+  overflow: hidden;
+}
+
+.tricolor-bar .bar {
+  height: 100%;
+}
+
+.tricolor-bar .win {
+  background-color: #85a94e;
+}
+.tricolor-bar .draws {
+  background-color: #8a8886;
+}
+.tricolor-bar .losses {
+  background-color: #b33430;
+}
+
+.game-bar .footer {
+  font-size: 12px;
+}
+.game-bar .footer .element {
+  overflow: hidden;
 }

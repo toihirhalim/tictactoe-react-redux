@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Case from './Case'
 import { useSelector, useDispatch } from 'react-redux'
-import { play, gameOver } from '../actions'
+import { play, gameOver, wonGame, lostGame, drawGame } from '../actions'
 import { gameStatus } from '../aditionalfunctions'
 
 export default function Board() {
@@ -18,9 +18,15 @@ export default function Board() {
         if (game.movesCount >= 5) {
             if (gameStatus(game.board, game.lastMove).result === 'WIN') {
                 dispatch(gameOver())
-                console.log('game over: ' + game.board[game.lastMove.x][game.lastMove.y] + ' won !!!')
+
+                if (game.board[game.lastMove.x][game.lastMove.y] === 'x') {
+                    dispatch(wonGame())
+                } else {
+                    dispatch(lostGame())
+                }
+
             } else if (game.movesCount === 9) {
-                console.log('game over but draw !!!')
+                dispatch(drawGame())
             }
         }
     }, [game.movesCount, game.board, game.lastMove, dispatch])
