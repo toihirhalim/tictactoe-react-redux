@@ -2,19 +2,33 @@ import React, { useEffect } from 'react'
 import Case from './Case'
 import { useSelector, useDispatch } from 'react-redux'
 import { play, gameOver, wonGame, lostGame, drawGame } from '../actions'
-import { gameStatus } from '../aditionalfunctions'
+import { gameStatus, aiPlays } from '../aditionalfunctions'
 
 export default function Board() {
     const game = useSelector(state => state.game)
+    const isAiPlaying = useSelector(state => state.isAiPlaying)
+    const level = useSelector(state => state.level)
     const dispatch = useDispatch()
 
     const playAtPosition = pos => {
-        if (game.isGameOver) return
+        if (game.isGameOver || (game.player === 'o' && isAiPlaying)) return
 
         dispatch(play(pos))
     }
 
+    const aiTurn = () => {
+        if (isAiPlaying && game.player === 'o') {
+            const pos = aiPlays(game.board, level)
+            if (pos) {
+                setTimeout(() => {
+                    dispatch(play(pos))
+                }, 500);
+            }
+        }
+    }
+
     useEffect(() => {
+        let gameIsOver = false
         if (game.movesCount >= 5) {
             if (gameStatus(game.board, game.lastMove).result === 'WIN') {
                 dispatch(gameOver())
@@ -24,12 +38,24 @@ export default function Board() {
                 } else {
                     dispatch(lostGame())
                 }
-
+                gameIsOver = true
             } else if (game.movesCount === 9) {
                 dispatch(drawGame())
+                gameIsOver = true
             }
         }
-    }, [game.movesCount, game.board, game.lastMove, dispatch])
+
+        if (!gameIsOver) aiTurn()
+
+    }, [game.player, game.movesCount, game.board, game.lastMove, dispatch])
+
+    /*useEffect(() => {
+        if (isAiPlaying && game.player === 'o') {
+            const pos = aiPlays(game.board, level)
+            console.log(pos)
+        }
+        console.log('called')
+    }, [game.player, game.board, isAiPlaying, level])*/
 
     return (
         <div className="board">

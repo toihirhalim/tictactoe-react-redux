@@ -41,3 +41,16 @@ export const getEmptyPositions = board => {
     return positions
 }
 
+export const aiPlays = (board, level) => {
+
+    if (level === 0 || true) {
+        const emptyPositions = getEmptyPositions(board)
+
+        if (emptyPositions.length >= 0)
+            return emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
+    }
+
+    return null
+
+}
+
