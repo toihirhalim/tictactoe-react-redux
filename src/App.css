@@ -144,6 +144,7 @@
 .game-bar .wins, .game-bar .draws,
 .game-bar .losses, .game-bar .default {
   display: flex;
+  align-items: center;
 }
 
 .game-bar .wins {
@@ -167,13 +168,13 @@
   height: 100%;
 }
 
-.tricolor-bar .win {
+.tricolor-bar .win, .plus {
   background-color: #85a94e;
 }
-.tricolor-bar .draws {
+.tricolor-bar .draws, .equal {
   background-color: #8a8886;
 }
-.tricolor-bar .losses {
+.tricolor-bar .losses, .minus {
   background-color: #b33430;
 }
 
@@ -182,4 +183,17 @@
 }
 .game-bar .footer .element {
   overflow: hidden;
+}
+
+.plus, .minus, .equal {
+  color: white;
+  padding: 2px;
+  margin: 2px;
+  border-radius: 15%;
+  height: 15px;
+  width: 15px;
+}
+
+.plus p, .minus p, .equal p {
+  transform: translateY(-6px);
 }

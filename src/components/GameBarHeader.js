@@ -1,4 +1,7 @@
 import React from 'react'
+import Equal from './materials/Equal'
+import Minus from './materials/Minus'
+import Plus from './materials/Plus'
 
 export default function GameBarHeader({ wins, losses, draws }) {
     return (
@@ -6,6 +9,7 @@ export default function GameBarHeader({ wins, losses, draws }) {
             {
                 wins !== 0 &&
                 <div className="wins" style={{ flex: wins }}>
+                    <Plus />
                     <p>{wins}</p>
                 </div>
             }
@@ -13,6 +17,7 @@ export default function GameBarHeader({ wins, losses, draws }) {
             {
                 draws !== 0 &&
                 <div className="draws" style={{ flex: draws }}>
+                    <Equal />
                     <p>{draws}</p>
                 </div>
             }
@@ -20,6 +25,7 @@ export default function GameBarHeader({ wins, losses, draws }) {
             {
                 losses !== 0 &&
                 <div className="losses" style={{ flex: losses }}>
+                    <Minus />
                     <p>{losses}</p>
                 </div>
             }
