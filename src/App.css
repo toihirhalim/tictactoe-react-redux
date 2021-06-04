@@ -38,6 +38,7 @@
   width: 300px;
   margin: auto;
   font-family: 'Finger Paint', cursive;
+  position: relative;
 }
 
 .case {
@@ -197,4 +198,12 @@
 
 .plus p, .minus p, .equal p {
   transform: translateY(-6px);
+}
+
+.line {
+  position: absolute;
+  height: 10px;
+  width: 270px;
+  border-radius: 2%/50%;
+  background-color: #b33430a6;
 }

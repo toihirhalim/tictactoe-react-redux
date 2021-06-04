@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Case from './Case'
 import { useSelector, useDispatch } from 'react-redux'
 import { play, gameOver, wonGame, lostGame, drawGame } from '../actions'
-import { gameStatus, aiPlays } from '../aditionalfunctions'
+import { gameStatus, aiPlays, getLineProperties } from '../aditionalfunctions'
+import Line from './materials/Line'
 
 export default function Board() {
     const game = useSelector(state => state.game)
     const isAiPlaying = useSelector(state => state.isAiPlaying)
     const level = useSelector(state => state.level)
     const dispatch = useDispatch()
+    const [lines, setLines] = useState([])
 
     const playAtPosition = pos => {
         if (game.isGameOver || (game.player === 'o' && isAiPlaying)) return
@@ -20,7 +22,8 @@ export default function Board() {
         if (game.gameIsOver) return
         let gameIsOver = false
         if (game.movesCount >= 5) {
-            if (gameStatus(game.board, game.lastMove).result === 'WIN') {
+            const status = gameStatus(game.board, game.lastMove)
+            if (status.result === 'WIN') {
                 dispatch(gameOver())
 
                 if (game.board[game.lastMove.x][game.lastMove.y] === 'x') {
@@ -29,10 +32,15 @@ export default function Board() {
                     dispatch(lostGame())
                 }
                 gameIsOver = true
+                setLines(status.types)
             } else if (game.movesCount === 9) {
                 dispatch(drawGame())
                 gameIsOver = true
+            } else {
+                setLines([])
             }
+        } else {
+            setLines([])
         }
 
         if (!gameIsOver && isAiPlaying && game.player === 'o') {
@@ -44,7 +52,8 @@ export default function Board() {
             }
         }
 
-    }, [game.gameIsOver, game.player, game.movesCount, game.board, game.lastMove, isAiPlaying, level, dispatch])
+    }, [game.gameIsOver, game.player, game.movesCount, game.board,
+    game.lastMove, isAiPlaying, level, dispatch, setLines])
 
     return (
         <div className="board">
@@ -65,6 +74,19 @@ export default function Board() {
                             />
                         )
                     })
+                })
+            }
+            {
+                lines.map((line, key) => {
+                    const props = getLineProperties(line, game.lastMove)
+                    return (
+                        <Line
+                            key={key}
+                            rot={props.rot}
+                            top={props.top}
+                            left={props.left}
+                        />
+                    )
                 })
             }
         </div>

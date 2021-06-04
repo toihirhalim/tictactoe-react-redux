@@ -54,3 +54,33 @@ export const aiPlays = (board, level) => {
 
 }
 
+export const getLineProperties = (type, pos) => {
+    if (type === 'row')
+        return {
+            rot: 0,
+            top: pos.x * 100 + 45,
+            left: 15
+        }
+
+    if (type === 'col')
+        return {
+            rot: 90,
+            top: 145,
+            left: pos.y * 100 - 85
+        }
+
+    if (type === 'diag')
+        return {
+            rot: 45,
+            top: 145,
+            left: 15
+        }
+
+    if (type === 'adiag')
+        return {
+            rot: -45,
+            top: 145,
+            left: 15
+        }
+}
+
