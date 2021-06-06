@@ -31,7 +31,7 @@ const gameReducer = (state = game, action) => {
                 player: state.player === 'x' ? 'o' : 'x',
                 lastMove: action.pos,
                 movesCount: state.movesCount + 1,
-                isGameOver: state.movesCount + 1 === 9
+                isGameOver: state.isGameOver
             }
         case 'OVER':
             return {

@@ -19,10 +19,13 @@ export default function Board() {
     }
 
     useEffect(() => {
-        if (game.gameIsOver) return
         let gameIsOver = false
         if (game.movesCount >= 5) {
             const status = gameStatus(game.board, game.lastMove)
+            setLines(status.types)
+
+            if (game.isGameOver) return
+
             if (status.result === 'WIN') {
                 dispatch(gameOver())
 
@@ -32,12 +35,10 @@ export default function Board() {
                     dispatch(lostGame())
                 }
                 gameIsOver = true
-                setLines(status.types)
+
             } else if (game.movesCount === 9) {
                 dispatch(drawGame())
                 gameIsOver = true
-            } else {
-                setLines([])
             }
         } else {
             setLines([])
@@ -52,7 +53,7 @@ export default function Board() {
             }
         }
 
-    }, [game.gameIsOver, game.player, game.movesCount, game.board,
+    }, [game.isGameOver, game.player, game.movesCount, game.board,
     game.lastMove, isAiPlaying, level, dispatch, setLines])
 
     return (
