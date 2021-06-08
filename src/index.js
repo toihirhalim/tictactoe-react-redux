@@ -6,8 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import allReducers from './reducers';
+import { loadState, saveState } from './aditionalfunctions/localstorage'
 
-const store = createStore(allReducers);
+const persistedState = loadState();
+
+const store = createStore(allReducers, persistedState.state);
+
+store.subscribe(() => {
+  saveState({
+    state: store.getState()
+  })
+})
 
 ReactDOM.render(
   <React.StrictMode>
