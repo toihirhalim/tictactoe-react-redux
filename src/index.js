@@ -10,7 +10,12 @@ import { loadState, saveState } from './aditionalfunctions/localstorage'
 
 const persistedState = loadState();
 
-const store = createStore(allReducers, persistedState.state);
+let store = null;
+
+if (persistedState)
+  store = createStore(allReducers, persistedState.state);
+else
+  store = createStore(allReducers);
 
 store.subscribe(() => {
   saveState({
