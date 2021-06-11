@@ -22,10 +22,6 @@
   font-weight: bold;
 }
 
-.new-game {
-  margin-top: 10px;
-}
-
 .new-game button {
   background-color: green;
   color: white;
@@ -37,8 +33,11 @@
   grid-template-columns: repeat(3, 100px);
   width: 300px;
   margin: auto;
-  font-family: 'Finger Paint', cursive;
   position: relative;
+}
+
+.finger-paint {
+  font-family: 'Finger Paint', cursive;
 }
 
 .case {
@@ -206,4 +205,28 @@
   width: 270px;
   border-radius: 2%/50%;
   background-color: #b33430a6;
+}
+
+.status {
+  width: 300px;
+  margin: 10px auto;
+  display: flex;
+}
+
+.status .player, .status .opponent, .status .new-game {
+  width: 100px;
+  display: flex;
+  align-items: center;
+}
+.status .new-game {
+  justify-content: center;
+}
+
+.status .player, .status .opponent {
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.player-char {
+  font-size: 25px;
 }

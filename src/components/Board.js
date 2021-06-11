@@ -57,7 +57,7 @@ export default function Board() {
     game.lastMove, isAiPlaying, level, dispatch, setLines])
 
     return (
-        <div className="board">
+        <div className="board finger-paint">
             {
                 game.board.map((arr, xKey) => {
                     return arr.map((value, yKey) => {
