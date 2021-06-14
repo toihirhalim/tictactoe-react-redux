@@ -43,15 +43,62 @@ export const getEmptyPositions = board => {
 
 export const aiPlays = (board, level) => {
 
-    if (level === 0 || true) {
-        const emptyPositions = getEmptyPositions(board)
+    const emptyPositions = getEmptyPositions(board)
 
-        if (emptyPositions.length >= 0)
-            return emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
+    if (level === 0 && emptyPositions.length >= 0) {
+        return emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
+    } else if (emptyPositions.length >= 0 && (level === 1 || true)) {
+        return playMediuim(board, emptyPositions)
     }
 
     return null
 
+}
+
+const playMediuim = (board, emptyPositions) => {
+    const opponent = 'x'
+    const player = 'o'
+
+    // attack
+    for (let i = 0; i < emptyPositions.length; i++) {
+        let restPos = getRestPositions(emptyPositions[i])
+
+        for (let j = 0; j < restPos.length; j++)
+            if (restPos[j].every(pos => {
+                return board[pos.x][pos.y] === player
+            }))
+                return emptyPositions[i]
+    }
+
+    // defense
+    for (let i = 0; i < emptyPositions.length; i++) {
+        let restPos = getRestPositions(emptyPositions[i])
+
+        for (let j = 0; j < restPos.length; j++)
+            if (restPos[j].every(pos => {
+                return board[pos.x][pos.y] === opponent
+            }))
+                return emptyPositions[i]
+    }
+
+
+    return emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
+}
+
+const getRestPositions = pos => {
+    const arr = []
+
+    arr.push([{ x: pos.x, y: 0 }, { x: pos.x, y: 1 }, { x: pos.x, y: 2 }].filter(item => item.y !== pos.y))
+
+    arr.push([{ x: 0, y: pos.y }, { x: 1, y: pos.y }, { x: 2, y: pos.y }].filter(item => item.x !== pos.x))
+
+    if (pos.x === pos.y)
+        arr.push([{ x: 0, y: 0 }, { x: 1, y: 1 }, { x: 2, y: 2 }].filter(item => item.x !== pos.x))
+
+    if (3 - pos.x - pos.y === 1)
+        arr.push([{ x: 2, y: 0 }, { x: 1, y: 1 }, { x: 0, y: 2 }].filter(item => item.x !== pos.x))
+
+    return arr
 }
 
 export const getLineProperties = (type, pos) => {
