@@ -1,6 +1,8 @@
 //https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/
 
 let player = 'o', opponent = 'x';
+let MAX = 1000;
+let MIN = -1000;
 
 function isMovesLeft(board) {
     for (let i = 0; i < 3; i++)
@@ -60,7 +62,7 @@ function evaluate(b) {
     return 0;
 }
 
-function minimax(board, depth, isMax) {
+function minimax(board, depth, isMax, alpha, beta) {
     let score = evaluate(board);
 
     // If Maximizer has won the game
@@ -94,11 +96,19 @@ function minimax(board, depth, isMax) {
 
                     // Call minimax recursively
                     // and choose the maximum value
-                    best = Math.max(best, minimax(board,
-                        depth + 1, !isMax));
+                    //best = Math.max(best, minimax(board,
+                    //depth + 1, !isMax));
+                    let val = minimax(board, depth + 1, !isMax, alpha, beta)
+                    best = Math.max(best, val);
+                    alpha = Math.max(alpha, best);
 
                     // Undo the move
                     board[i][j] = '';
+
+                    // Alpha Beta Pruning
+                    if (beta <= alpha)
+                        break;
+
                 }
             }
         }
@@ -121,11 +131,19 @@ function minimax(board, depth, isMax) {
 
                     // Call minimax recursively and
                     // choose the minimum value
-                    best = Math.min(best, minimax(board,
-                        depth + 1, !isMax));
+                    //best = Math.min(best, minimax(board,
+                    //depth + 1, !isMax));
+
+                    let val = minimax(board, depth + 1, !isMax, alpha, beta)
+                    best = Math.min(best, val);
+                    beta = Math.min(beta, best);
 
                     // Undo the move
                     board[i][j] = '';
+
+                    if (beta <= alpha)
+                        break;
+
                 }
             }
         }
@@ -152,7 +170,7 @@ export function findBestMove(board) {
 
                 // compute evaluation function
                 // for this move.
-                let moveVal = minimax(board, 0, false);
+                let moveVal = minimax(board, 0, false, MIN, MAX);
 
                 // Undo the move
                 board[i][j] = '';
