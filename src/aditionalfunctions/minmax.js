@@ -135,10 +135,7 @@ function minimax(board, depth, isMax) {
 
 export function findBestMove(board) {
     let bestVal = -1000;
-    //let bestMove = new Move();
-    let bestMove = { x: -1, y: -1 }
-    bestMove.row = -1;
-    bestMove.col = -1;
+    let bestMoves = [];
 
     // Traverse all cells, evaluate
     // minimax function for all empty
@@ -164,13 +161,14 @@ export function findBestMove(board) {
                 // is more than the best value, then
                 // update best
                 if (moveVal > bestVal) {
-                    bestMove.x = i;
-                    bestMove.y = j;
+                    bestMoves = [{ x: i, y: j }]
                     bestVal = moveVal;
+                } else if (moveVal === bestVal) {
+                    bestMoves.push({ x: i, y: j })
                 }
             }
         }
     }
 
-    return bestMove;
+    return bestMoves[Math.floor(Math.random() * bestMoves.length)];
 }
