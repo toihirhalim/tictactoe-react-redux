@@ -1,4 +1,6 @@
 
+import { findBestMove } from '../aditionalfunctions/minmax'
+
 export const gameStatus = (board, pos) => {
     const status = { result: 'UNKNOWN', types: [] }
 
@@ -47,8 +49,10 @@ export const aiPlays = (board, level) => {
 
     if (level === 0 && emptyPositions.length >= 0) {
         return emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
-    } else if (emptyPositions.length >= 0 && (level === 1 || true)) {
+    } else if (emptyPositions.length >= 0 && level === 1) {
         return playMediuim(board, emptyPositions)
+    } else if (level === 2) {
+        return findBestMove(board)
     }
 
     return null
