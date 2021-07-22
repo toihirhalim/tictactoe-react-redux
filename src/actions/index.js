@@ -88,3 +88,16 @@ export const aiPlayHard = () => {
         type: 'HARD'
     }
 }
+
+// online mode actions
+export const playOnline = () => {
+    return {
+        type: "ONLINE"
+    }
+}
+
+export const playOffline = () => {
+    return {
+        type: "OFFLINE"
+    }
+}
