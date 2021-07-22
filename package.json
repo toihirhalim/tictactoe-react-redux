@@ -1,8 +1,24 @@
 {
   "name": "tictactoe-react-redux",
+  "description": "A tictactoe game made with react and redux",
+  "version": "1.0.0",
+  "author": "Toihir Halim",
+  "license": "MIT",
   "homepage": "https://toihirhalim.github.io/tictactoe-react-redux",
-  "version": "0.1.0",
-  "private": true,
+  "keywords": [
+    "tictactoe",
+    "game",
+    "react",
+    "redux"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toihirhalim/tictactoe-react-redux.git"
+  },
+  "bugs": {
+    "url": "https://github.com/toihirhalim/tictactoe-react-redux/issues"
+  },
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
