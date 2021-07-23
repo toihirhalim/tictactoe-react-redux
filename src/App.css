@@ -169,13 +169,13 @@
   height: 100%;
 }
 
-.tricolor-bar .win, .plus {
+.tricolor-bar .win, .plus, .green-background {
   background-color: #85a94e;
 }
-.tricolor-bar .draws, .equal {
+.tricolor-bar .draws, .equal, .dead-background {
   background-color: #8a8886;
 }
-.tricolor-bar .losses, .minus {
+.tricolor-bar .losses, .minus, .red-background {
   background-color: #b33430;
 }
 
@@ -229,4 +229,28 @@
 
 .player-char {
   font-size: 25px;
+}
+
+.game-mode, .game-mode .choices {
+  display: flex;
+}
+
+.game-mode {
+  margin: 10px 0;
+  justify-content: center;
+  justify-items: center;
+}
+
+.game-mode .choices {
+  margin-left: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.game-mode h4 {
+  padding: 5px;
+}
+
+.game-mode .choices .choice {
+  padding: 5px 10px;
 }
