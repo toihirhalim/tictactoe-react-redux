@@ -1,5 +1,5 @@
-const isAiPlayingReducer = (state = true, actiion) => {
-    switch (actiion.type) {
+const isAiPlayingReducer = (state = true, action) => {
+    switch (action.type) {
         case 'HUMAIN':
             return false
         case 'AI':
