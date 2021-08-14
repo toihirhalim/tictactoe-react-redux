@@ -1,12 +1,22 @@
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import './App.css'
+import Auth from './auth'
 import Game from './components/Game'
+import Header from './components/Header';
 
 function App() {
   return (
     <div className="App">
-      <h1 className="title">Tic Tac Toe</h1>
+      <Router>
+        <Header />
 
-      <Game />
+        <Game />
+
+        <Route path={["/login", "/signup"]}>
+          <Auth />
+        </Route>
+
+      </Router>
 
     </div>
   );
