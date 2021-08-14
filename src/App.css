@@ -2,10 +2,28 @@
   text-align: center;
 }
 
-.title {
-  padding: 10px;
+.header {
   background-color: blueviolet;
+  height: 50px;
+  position: relative;
+}
+
+.header .title .link {
   color: white;
+  text-decoration: none;
+}
+
+.header .auth-links {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.header .auth-links .auth-btn {
+  margin-right: 10px;
 }
 
 .board, .case {
