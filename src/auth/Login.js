@@ -6,7 +6,7 @@ export default function Login() {
     const [error, setError] = useState('')
     const [state, setState] = useState({
         username: '',
-        password: '',
+        password: ''
     })
 
     const handleSubmit = e => {

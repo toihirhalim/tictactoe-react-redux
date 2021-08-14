@@ -7,10 +7,24 @@ export default function SignUp() {
     const [state, setState] = useState({
         username: '',
         password: '',
+        confirmPassword: '',
+        passwordMachted: true
     })
 
     const handleSubmit = e => {
         e.preventDefault();
+
+        setError('')
+
+        if (state.password !== state.confirmPassword) {
+            setError("passwords doesn't macth")
+            return
+        }
+
+        const body = {
+            username: state.username,
+            password: state.password
+        }
 
         fetch(serverUri + '/register', {
             method: 'POST',
@@ -18,7 +32,7 @@ export default function SignUp() {
                 'Content-Type': 'application/json'
             },
             credentials: 'include',
-            body: JSON.stringify(state)
+            body: JSON.stringify(body)
         })
             .then(res => res.json())
             .then(data => {
@@ -29,11 +43,11 @@ export default function SignUp() {
 
     return (
         <div className="auth-container">
-            <h2 className="auth-title">Sign In</h2>
+            <h2 className="auth-title">Sign up</h2>
             <form onSubmit={handleSubmit}>
                 <div className="auth-label">
                     <label for="username">
-                        <p>username :</p>
+                        <p>Choose a username :</p>
                         <input
                             type="text"
                             className="auth-inputs"
@@ -43,21 +57,46 @@ export default function SignUp() {
                         />
                     </label>
                 </div>
+
                 <div className="auth-label">
                     <label for="password" className="auth-label">
-                        <p>Password :</p>
+                        <p>Choose a Password :</p>
                         <input
                             type="password"
                             className="auth-inputs"
                             value={state.password}
-                            onChange={e => setState({ ...state, password: e.target.value })}
+                            onChange={e => setState({
+                                ...state,
+                                password: e.target.value,
+                                passwordMachted: state.confirmPassword === '' ||
+                                    state.confirmPassword === e.target.value
+                            })}
+                            required
+                        />
+                    </label>
+
+                    <label for="password" className="auth-label">
+                        <p>Confirm password :</p>
+                        <input
+                            type="password"
+                            className="auth-inputs"
+                            value={state.confirmPassword}
+                            onChange={e => setState({
+                                ...state,
+                                confirmPassword: e.target.value,
+                                passwordMachted: state.password === e.target.value
+                            })}
+                            style={state.passwordMachted ?
+                                { border: 'black solid 1px' } :
+                                { border: 'red solid 1px' }
+                            }
                             required
                         />
                     </label>
                 </div>
 
                 <div className="auth-button-container">
-                    <button className="auth-button btn" type="submit">Login</button>
+                    <button className="auth-button btn" type="submit">Create Account</button>
                 </div>
 
             </form>
