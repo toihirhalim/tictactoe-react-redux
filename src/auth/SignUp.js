@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { generatePassword } from '../aditionalfunctions/randomPasswordGenerator'
 
 export default function SignUp() {
     const serverUri = process.env.REACT_APP_API_URL || 'https://server-tictactoe.herokuapp.com'
     const [error, setError] = useState('')
+    const [generatedRandomPassword, setGeneratedRandomPassword] = useState('')
     const [state, setState] = useState({
         username: '',
         password: '',
@@ -11,8 +13,12 @@ export default function SignUp() {
         passwordMachted: true,
         hidePassword: true,
         hideConfirmPassword: true,
-        fetch: true
+        fetch: true,
     })
+
+    useEffect(() => {
+        setGeneratedRandomPassword(generatePassword())
+    }, [setGeneratedRandomPassword])
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -111,6 +117,19 @@ export default function SignUp() {
                         <i className="bi bi-eye-slash eye" onClick={e => setState({ ...state, hideConfirmPassword: !state.hideConfirmPassword })}></i>
                     </label>
                 </div>
+
+                <p className="random-password">
+                    use this password :
+                    <span
+                        className="sugested-password"
+                        onClick={e => setState({
+                            ...state,
+                            password: generatedRandomPassword,
+                            confirmPassword: generatedRandomPassword,
+                            passwordMachted: true
+                        })}
+                    >{generatedRandomPassword}</span>
+                </p>
 
                 <div className="auth-button-container">
                     <button className="auth-button btn" type="submit">Create Account</button>

@@ -37,17 +37,21 @@
     margin-top: 10px;
 }
 
-.auth-link-to-component {
+.auth-link-to-component, .random-password, .auth-error {
     font-size: 14px;
 }
 
 .auth-error {
     color: red;
-    font-size: 14px;
 }
 
 .eye {
     margin-left: -30px;
     font-size: 25px;
+    cursor: pointer;
+}
+
+.sugested-password {
+    margin-left: 3px;
     cursor: pointer;
 }
