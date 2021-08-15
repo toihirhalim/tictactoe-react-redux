@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { login } from '../actions'
 
 export default function Login() {
+    const dispatch = useDispatch()
     const serverUri = process.env.REACT_APP_API_URL || 'https://server-tictactoe.herokuapp.com'
     const [error, setError] = useState('')
     const [state, setState] = useState({
@@ -36,7 +39,7 @@ export default function Login() {
                 if (res.ok)
                     res.json()
                         .then(data => {
-                            console.log(data)
+                            dispatch(login(data.token))
                             setError('')
                         })
                 else {

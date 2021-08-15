@@ -101,3 +101,26 @@ export const playOffline = () => {
         type: "OFFLINE"
     }
 }
+
+// auth actions
+
+export const login = token => {
+    return {
+        type: 'LOGIN',
+        token
+    }
+}
+
+export const logout = () => {
+    return {
+        type: 'LOGOUT'
+    }
+}
+
+export const setToken = token => {
+    return {
+        type: 'TOKEN',
+        token
+    }
+}
+

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { generatePassword } from '../aditionalfunctions/randomPasswordGenerator'
+import { useDispatch } from 'react-redux'
+import { login } from '../actions'
 
 export default function SignUp() {
+    const dispatch = useDispatch()
     const serverUri = process.env.REACT_APP_API_URL || 'https://server-tictactoe.herokuapp.com'
     const [error, setError] = useState('')
     const [generatedRandomPassword, setGeneratedRandomPassword] = useState('')
@@ -50,7 +53,7 @@ export default function SignUp() {
                 if (res.ok)
                     res.json()
                         .then(data => {
-                            console.log(data)
+                            dispatch(login(data.token))
                             setError('')
                         })
                 else {
