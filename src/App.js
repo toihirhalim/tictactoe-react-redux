@@ -12,7 +12,7 @@ function App() {
 
         <Game />
 
-        <Route path={["/login", "/signup"]}>
+        <Route path={["/login", "/signup", "/logout"]}>
           <Auth />
         </Route>
 

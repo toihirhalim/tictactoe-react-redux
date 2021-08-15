@@ -70,7 +70,7 @@ export default function SignUp() {
             <h2 className="auth-title">Sign up</h2>
             <form onSubmit={handleSubmit}>
                 <div className="auth-label">
-                    <label for="username">
+                    <label htmlFor="username">
                         <p>Choose a username :</p>
                         <input
                             type="text"
@@ -83,7 +83,7 @@ export default function SignUp() {
                 </div>
 
                 <div className="auth-label">
-                    <label for="password" className="auth-label">
+                    <label htmlFor="password" className="auth-label">
                         <p>Choose a Password :</p>
                         <input
                             type={state.hidePassword ? "password" : "text"}
@@ -100,7 +100,7 @@ export default function SignUp() {
                         <i className="bi bi-eye-slash eye" onClick={e => setState({ ...state, hidePassword: !state.hidePassword })}></i>
                     </label>
 
-                    <label for="password" className="auth-label">
+                    <label htmlFor="password" className="auth-label">
                         <p>Confirm password :</p>
                         <input
                             type={state.hideConfirmPassword ? "password" : "text"}

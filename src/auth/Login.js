@@ -56,7 +56,7 @@ export default function Login() {
             <h2 className="auth-title">Log In</h2>
             <form onSubmit={handleSubmit}>
                 <div className="auth-label">
-                    <label for="username">
+                    <label htmlFor="username">
                         <p>username or email :</p>
                         <input
                             type="text"
@@ -68,7 +68,7 @@ export default function Login() {
                     </label>
                 </div>
                 <div className="auth-label">
-                    <label for="password" className="auth-label">
+                    <label htmlFor="password" className="auth-label">
                         <p>Password :</p>
                         <input
                             type={state.hidePassword ? "password" : "text"}
