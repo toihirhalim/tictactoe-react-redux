@@ -1,15 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import Login from './Login'
 import SignUp from './SignUp'
+import { useSelector } from 'react-redux'
 import './auth.css'
 
 export default function Auth() {
     const match = useRouteMatch()
     const history = useHistory()
+    const [componentReady, seComponentReady] = useState(false)
+    const isLogged = useSelector(state => state.auth.isLogged)
 
-    if (match.url !== '/login' && match.url !== '/signup')
-        history.push("/")
+    useEffect(() => {
+        if (isLogged || (match.url !== '/login' && match.url !== '/signup'))
+            history.push("/")
+        else seComponentReady(true)
+    }, [isLogged, match.url, history, seComponentReady])
+
 
     const serverUri = 'http://localhost:3001/'
     const [token, setToken] = useState('')
@@ -56,6 +63,8 @@ export default function Auth() {
         if (e.target.classList.contains('auth'))
             history.push("/")
     }
+
+    if (!componentReady) return <></>
 
     return (
         <div className="auth" onClick={redirectBack}>
