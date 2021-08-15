@@ -7,11 +7,15 @@ export default function Login() {
     const [state, setState] = useState({
         username: '',
         password: '',
-        hidePassword: true
+        hidePassword: true,
+        fetch: true
     })
 
     const handleSubmit = e => {
         e.preventDefault();
+
+        if (!state.fetch) return
+        setState({ ...state, fetch: false })
 
         setError('')
 
@@ -35,10 +39,12 @@ export default function Login() {
                             console.log(data)
                             setError('')
                         })
-                else
+                else {
                     res.json()
                         .then(data => setError(data.msg))
                         .catch(e => setError('something went wrong: please try again'))
+                    setState({ ...state, fetch: true })
+                }
             })
     }
 
