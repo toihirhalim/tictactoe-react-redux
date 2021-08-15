@@ -45,3 +45,9 @@
     color: red;
     font-size: 14px;
 }
+
+.eye {
+    margin-left: -30px;
+    font-size: 25px;
+    cursor: pointer;
+}

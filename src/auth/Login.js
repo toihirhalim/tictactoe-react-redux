@@ -6,20 +6,27 @@ export default function Login() {
     const [error, setError] = useState('')
     const [state, setState] = useState({
         username: '',
-        password: ''
+        password: '',
+        hidePassword: true
     })
 
     const handleSubmit = e => {
         e.preventDefault();
 
         setError('')
+
+        const body = {
+            username: state.username,
+            password: state.password
+        }
+
         fetch(serverUri + '/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: 'include',
-            body: JSON.stringify(state)
+            body: JSON.stringify(body)
         })
             .then(res => {
                 if (res.ok)
@@ -55,12 +62,13 @@ export default function Login() {
                     <label for="password" className="auth-label">
                         <p>Password :</p>
                         <input
-                            type="password"
+                            type={state.hidePassword ? "password" : "text"}
                             className="auth-inputs"
                             value={state.password}
                             onChange={e => setState({ ...state, password: e.target.value })}
                             required
                         />
+                        <i className="bi bi-eye-slash eye" onClick={e => setState({ ...state, hidePassword: !state.hidePassword })}></i>
                     </label>
                 </div>
 
@@ -83,6 +91,6 @@ export default function Login() {
                 </p>
             </div>
 
-        </div>
+        </div >
     )
 }

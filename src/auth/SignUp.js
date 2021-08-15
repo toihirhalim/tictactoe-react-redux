@@ -8,7 +8,9 @@ export default function SignUp() {
         username: '',
         password: '',
         confirmPassword: '',
-        passwordMachted: true
+        passwordMachted: true,
+        hidePassword: true,
+        hideConfirmPassword: true
     })
 
     const handleSubmit = e => {
@@ -69,7 +71,7 @@ export default function SignUp() {
                     <label for="password" className="auth-label">
                         <p>Choose a Password :</p>
                         <input
-                            type="password"
+                            type={state.hidePassword ? "password" : "text"}
                             className="auth-inputs"
                             value={state.password}
                             onChange={e => setState({
@@ -80,12 +82,13 @@ export default function SignUp() {
                             })}
                             required
                         />
+                        <i className="bi bi-eye-slash eye" onClick={e => setState({ ...state, hidePassword: !state.hidePassword })}></i>
                     </label>
 
                     <label for="password" className="auth-label">
                         <p>Confirm password :</p>
                         <input
-                            type="password"
+                            type={state.hideConfirmPassword ? "password" : "text"}
                             className="auth-inputs"
                             value={state.confirmPassword}
                             onChange={e => setState({
@@ -99,6 +102,7 @@ export default function SignUp() {
                             }
                             required
                         />
+                        <i className="bi bi-eye-slash eye" onClick={e => setState({ ...state, hideConfirmPassword: !state.hideConfirmPassword })}></i>
                     </label>
                 </div>
 
