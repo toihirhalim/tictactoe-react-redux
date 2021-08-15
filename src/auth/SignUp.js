@@ -34,11 +34,18 @@ export default function SignUp() {
             credentials: 'include',
             body: JSON.stringify(body)
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            .then(res => {
+                if (res.ok)
+                    res.json()
+                        .then(data => {
+                            console.log(data)
+                            setError('')
+                        })
+                else
+                    res.json()
+                        .then(data => setError(data.msg))
+                        .catch(e => setError('something went wrong: please try again'))
             })
-
     }
 
     return (

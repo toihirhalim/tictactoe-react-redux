@@ -12,6 +12,7 @@ export default function Login() {
     const handleSubmit = e => {
         e.preventDefault();
 
+        setError('')
         fetch(serverUri + '/login', {
             method: 'POST',
             headers: {
@@ -20,11 +21,18 @@ export default function Login() {
             credentials: 'include',
             body: JSON.stringify(state)
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            .then(res => {
+                if (res.ok)
+                    res.json()
+                        .then(data => {
+                            console.log(data)
+                            setError('')
+                        })
+                else
+                    res.json()
+                        .then(data => setError(data.msg))
+                        .catch(e => setError('something went wrong: please try again'))
             })
-
     }
 
     return (

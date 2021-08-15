@@ -14,22 +14,6 @@ export default function Auth() {
     const serverUri = 'http://localhost:3001/'
     const [token, setToken] = useState('')
 
-    const login = e => {
-        fetch(serverUri + 'login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                username: 'Kyle',
-                password: 'password'
-            })
-        })
-            .then(res => res.json())
-            .then(data => setToken(data.token))
-    }
-
     const logout = e => {
         fetch(serverUri + 'logout', { credentials: 'include' })
             .then(res => {
