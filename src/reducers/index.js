@@ -4,6 +4,8 @@ import isAiPlayingReducer from './isAiPlaying';
 import levelReduicer from './level'
 import isOnlineModeReduicer from './isOnlineMode';
 import authReduicer from './auth'
+import playerReduicer from './player'
+
 import { combineReducers } from 'redux';
 
 const allReducers = combineReducers({
@@ -12,7 +14,8 @@ const allReducers = combineReducers({
     isAiPlaying: isAiPlayingReducer,
     level: levelReduicer,
     isOnlineMode: isOnlineModeReduicer,
-    auth: authReduicer
+    auth: authReduicer,
+    player: playerReduicer
 })
 
 export default allReducers;

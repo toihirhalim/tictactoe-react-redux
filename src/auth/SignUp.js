@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { generatePassword } from '../aditionalfunctions/randomPasswordGenerator'
 import { useDispatch } from 'react-redux'
-import { login } from '../actions'
+import { login, setPlayer } from '../actions'
 
 export default function SignUp() {
     const dispatch = useDispatch()
@@ -54,6 +54,7 @@ export default function SignUp() {
                     res.json()
                         .then(data => {
                             dispatch(login(data.token))
+                            dispatch(setPlayer(data.player))
                             setError('')
                         })
                 else {

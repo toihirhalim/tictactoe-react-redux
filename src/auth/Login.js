@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { login } from '../actions'
+import { login, setPlayer } from '../actions'
 
 export default function Login() {
     const dispatch = useDispatch()
@@ -40,6 +40,7 @@ export default function Login() {
                     res.json()
                         .then(data => {
                             dispatch(login(data.token))
+                            dispatch(setPlayer(data.player))
                             setError('')
                         })
                 else {
