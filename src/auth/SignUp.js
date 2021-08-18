@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { generatePassword } from '../aditionalfunctions/randomPasswordGenerator'
+import generatePassword from 'rand-password'
 import { useDispatch } from 'react-redux'
 import { login, setPlayer } from '../actions'
+import { FiEyeOff, FiEye } from 'react-icons/fi';
+import { RiFileCopy2Line } from 'react-icons/ri';
 
 export default function SignUp() {
     const dispatch = useDispatch()
     const serverUri = process.env.REACT_APP_API_URL || 'https://server-tictactoe.herokuapp.com'
     const [error, setError] = useState('')
-    const [generatedRandomPassword, setGeneratedRandomPassword] = useState('')
+    const [suggestedPassword, setSuggestedPasswordrd] = useState({ value: '', show: false, hover: false })
     const [state, setState] = useState({
         username: '',
         password: '',
         confirmPassword: '',
         passwordMachted: true,
         hidePassword: true,
-        hideConfirmPassword: true,
         fetch: true,
     })
 
     useEffect(() => {
-        setGeneratedRandomPassword(generatePassword())
-    }, [setGeneratedRandomPassword])
+        setSuggestedPasswordrd({ value: generatePassword(), show: false, hover: false })
+    }, [setSuggestedPasswordrd])
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -68,7 +69,7 @@ export default function SignUp() {
 
     return (
         <div className="auth-container">
-            <h2 className="auth-title">Sign up</h2>
+            <h1 className="auth-title signup-title">Sign up</h1>
             <form onSubmit={handleSubmit}>
                 <div className="auth-label">
                     <label htmlFor="username">
@@ -85,7 +86,20 @@ export default function SignUp() {
 
                 <div className="auth-label">
                     <label htmlFor="password" className="auth-label">
-                        <p>Choose a Password :</p>
+                        <div className="password-title">
+                            <p>Choose a Password :</p>
+                            {
+                                state.password !== '' &&
+                                <div className="password-icons">
+                                    {
+                                        state.hidePassword ?
+                                            <FiEye className="icon" onClick={e => setState({ ...state, hidePassword: !state.hidePassword })} /> :
+                                            <FiEyeOff className="icon" onClick={e => setState({ ...state, hidePassword: !state.hidePassword })} />
+                                    }
+                                    <RiFileCopy2Line className="icon" onClick={e => { navigator.clipboard.writeText(state.password) }} />
+                                </div>
+                            }
+                        </div>
                         <input
                             type={state.hidePassword ? "password" : "text"}
                             className="auth-inputs"
@@ -96,47 +110,60 @@ export default function SignUp() {
                                 passwordMachted: state.confirmPassword === '' ||
                                     state.confirmPassword === e.target.value
                             })}
+                            onFocus={e => setSuggestedPasswordrd({ ...suggestedPassword, show: true })}
+                            onBlur={e => setSuggestedPasswordrd({ ...suggestedPassword, show: false })}
                             required
                         />
-                        <i className="bi bi-eye-slash eye" onClick={e => setState({ ...state, hidePassword: !state.hidePassword })}></i>
                     </label>
+                    {
+                        (suggestedPassword.show || suggestedPassword.hover) && state.password !== suggestedPassword.value &&
+                        <div className="random-password-container"
+                            onMouseEnter={e => setSuggestedPasswordrd({ ...suggestedPassword, hover: true })}
+                            onMouseLeave={e => setSuggestedPasswordrd({ ...suggestedPassword, hover: false })}
+                        >
+                            <div className="random-password">
+                                <p>
+                                    Suggested :
+                                    <span
+                                        className="sugested-password"
+                                        onClick={e => setState({
+                                            ...state,
+                                            password: suggestedPassword.value,
+                                            confirmPassword: suggestedPassword.value,
+                                            passwordMachted: true,
+                                        })}
+                                    >{suggestedPassword.value}</span>
+                                </p>
+                            </div>
+                        </div>
+                    }
 
-                    <label htmlFor="password" className="auth-label">
-                        <p>Confirm password :</p>
-                        <input
-                            type={state.hideConfirmPassword ? "password" : "text"}
-                            className="auth-inputs"
-                            value={state.confirmPassword}
-                            onChange={e => setState({
-                                ...state,
-                                confirmPassword: e.target.value,
-                                passwordMachted: state.password === e.target.value
-                            })}
-                            style={state.passwordMachted ?
-                                { border: 'black solid 1px' } :
-                                { border: 'red solid 1px' }
-                            }
-                            required
-                        />
-                        <i className="bi bi-eye-slash eye" onClick={e => setState({ ...state, hideConfirmPassword: !state.hideConfirmPassword })}></i>
-                    </label>
+                    {
+                        state.password !== '' &&
+                        <label htmlFor="password" className="auth-label">
+                            <p>Confirm password :</p>
+                            <input
+                                type={state.hidePassword ? "password" : "text"}
+                                className="auth-inputs"
+                                value={state.confirmPassword}
+                                onChange={e => setState({
+                                    ...state,
+                                    confirmPassword: e.target.value,
+                                    passwordMachted: state.password === e.target.value
+                                })}
+                                style={state.passwordMachted ?
+                                    { border: 'black solid 1px' } :
+                                    { border: 'red solid 1px' }
+                                }
+                                required
+                            />
+                        </label>
+                    }
+
                 </div>
 
-                <p className="random-password">
-                    use this password :
-                    <span
-                        className="sugested-password"
-                        onClick={e => setState({
-                            ...state,
-                            password: generatedRandomPassword,
-                            confirmPassword: generatedRandomPassword,
-                            passwordMachted: true
-                        })}
-                    >{generatedRandomPassword}</span>
-                </p>
-
                 <div className="auth-button-container">
-                    <button className="auth-button btn" type="submit">Create Account</button>
+                    <button className="auth-button signup-submit-btn" type="submit">Create Account</button>
                 </div>
 
             </form>

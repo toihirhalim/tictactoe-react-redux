@@ -16,6 +16,16 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.auth-title {
+    border-bottom: 1px solid black;
+}
+.login-title{
+    color: blueviolet;
+}
+.signup-title{
+    color: #85a94e;
+}
+
 .auth-inputs{
     border: black solid 1px;
     width: 100%;
@@ -45,13 +55,67 @@
     color: red;
 }
 
-.eye {
-    margin-left: -30px;
-    font-size: 25px;
+.auth-label {
+    position: relative;
+}
+
+.password-title {
+    display: flex;
+    justify-content: space-between;
+}
+.icon {
     cursor: pointer;
+    font-size: 20px;
+    margin-left:  10px;
+}
+
+.random-password-container {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 40px;
+    width: 100%;
+    padding: 5px;
+    position: absolute;
+    background-color: white;
+    top: 57px;
+    z-index: 1;
+}
+
+.random-password {
+    display: flex;
+    align-items: center;
+    align-items: center;
+    cursor:pointer;
+    height: 100%;
+}
+
+.random-password-container:hover{
+    background-color: rgb(245, 240, 240);
 }
 
 .sugested-password {
     margin-left: 3px;
+}
+
+.auth-button {
+    padding: 10px;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
     cursor: pointer;
+    border: none;
+}
+
+.login-submit-btn {
+    background: blueviolet;
+}
+.signup-submit-btn {
+    background: #85a94e;
+}
+
+.login-submit-btn:hover{
+    background: rgb(125, 32, 211);
+}
+.signup-submit-btn:hover {
+    background: #7da146;
 }
