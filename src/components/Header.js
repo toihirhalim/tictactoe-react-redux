@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 export default function Header() {
     const isLogged = useSelector(state => state.auth.isLogged)
+    const username = useSelector(state => state.player.username)
 
     return (
         <header className="header">
@@ -14,10 +15,20 @@ export default function Header() {
             </div>
             {
                 isLogged ? (
-                    <div className="auth-links">
-                        <Link to="logout">
-                            <button className="auth-btn login-link-btn">logout</button>
-                        </Link>
+                    <div className="auth-links player-menu">
+                        <h3>{username}</h3>
+                        <div className="menu">
+                            <p>
+                                <Link to="#" className="menu-item">
+                                    Profile
+                                </Link>
+                            </p>
+                            <p>
+                                <Link to="logout" className="menu-item">
+                                    Logout
+                                </Link>
+                            </p>
+                        </div>
                     </div>
                 ) : (
                     <div className="auth-links">
@@ -31,6 +42,6 @@ export default function Header() {
                 )
             }
 
-        </header>
+        </header >
     )
 }

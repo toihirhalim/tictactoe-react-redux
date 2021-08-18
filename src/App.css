@@ -7,6 +7,10 @@
   height: 50px;
   position: relative;
 }
+.header .title {
+  display: flex;
+  justify-content: center;
+}
 
 .header .title .link {
   color: white;
@@ -22,8 +26,54 @@
   align-items: center;
 }
 
-.header .auth-links .auth-btn {
+.header .auth-links .auth-btn, .player-menu h3 {
   margin-right: 10px;
+}
+
+.login-link-btn, .signup-link-btn{
+  cursor: pointer;
+  color: white;
+  border-radius: 7%
+} 
+
+.login-link-btn {
+  background: none;
+  border: 1px solid white;
+}
+
+.signup-link-btn {
+  background: #85a94e;
+  border: 1px solid #85a94e;
+}
+
+.player-menu {
+  color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.player-menu .menu {
+  display: none;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 15px;
+  position: absolute;
+  text-align: left;
+  top: 50px;
+  right: 0;
+}
+
+.player-menu .menu-item {
+  color: black;
+  text-decoration: none;
+}
+
+.player-menu .menu-item:hover {
+  color: blueviolet;
+}
+
+.player-menu:hover .menu {
+  display: block
 }
 
 .board, .case {
