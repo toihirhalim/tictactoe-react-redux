@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { logout } from '../actions'
+import { logout, clearPlayer } from '../actions'
 
 export default function Logout() {
     const dispatch = useDispatch()
@@ -9,7 +9,10 @@ export default function Logout() {
     useEffect(() => {
         fetch(serverUri + '/logout', { credentials: 'include' })
             .then(res => {
-                if (res.ok) dispatch(logout())
+                if (res.ok) {
+                    dispatch(logout())
+                    dispatch(clearPlayer())
+                }
             })
     }, [dispatch, serverUri])
 

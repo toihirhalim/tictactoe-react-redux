@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { login } from '../actions'
+import { login, setPlayer } from '../actions'
+import { FiEyeOff, FiEye } from 'react-icons/fi';
 
 export default function Login() {
     const dispatch = useDispatch()
@@ -40,6 +41,7 @@ export default function Login() {
                     res.json()
                         .then(data => {
                             dispatch(login(data.token))
+                            dispatch(setPlayer(data.player))
                             setError('')
                         })
                 else {
@@ -53,7 +55,7 @@ export default function Login() {
 
     return (
         <div className="auth-container">
-            <h2 className="auth-title">Log In</h2>
+            <h1 className="auth-title login-title">Log In</h1>
             <form onSubmit={handleSubmit}>
                 <div className="auth-label">
                     <label htmlFor="username">
@@ -69,7 +71,19 @@ export default function Login() {
                 </div>
                 <div className="auth-label">
                     <label htmlFor="password" className="auth-label">
-                        <p>Password :</p>
+                        <div className="password-title">
+                            <p>Password :</p>
+                            {
+                                state.password !== '' &&
+                                <div className="password-icons">
+                                    {
+                                        state.hidePassword ?
+                                            <FiEye className="icon" onClick={e => setState({ ...state, hidePassword: !state.hidePassword })} /> :
+                                            <FiEyeOff className="icon" onClick={e => setState({ ...state, hidePassword: !state.hidePassword })} />
+                                    }
+                                </div>
+                            }
+                        </div>
                         <input
                             type={state.hidePassword ? "password" : "text"}
                             className="auth-inputs"
@@ -77,12 +91,11 @@ export default function Login() {
                             onChange={e => setState({ ...state, password: e.target.value })}
                             required
                         />
-                        <i className="bi bi-eye-slash eye" onClick={e => setState({ ...state, hidePassword: !state.hidePassword })}></i>
                     </label>
                 </div>
 
                 <div className="auth-button-container">
-                    <button className="auth-button btn" type="submit">Login</button>
+                    <button className="auth-button login-submit-btn" type="submit">Login</button>
                 </div>
 
             </form>

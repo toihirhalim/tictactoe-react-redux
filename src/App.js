@@ -5,7 +5,7 @@ import Auth from './auth'
 import Game from './components/Game'
 import Header from './components/Header'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from './actions'
+import { login, setPlayer } from './actions'
 import { socket, SocketContext } from './context/socket'
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
           res.json()
             .then(data => {
               dispatch(login(data.token))
+              dispatch(setPlayer(data.player))
             })
       })
   }, [serverUri, dispatch])

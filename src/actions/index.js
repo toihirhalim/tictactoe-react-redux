@@ -124,3 +124,18 @@ export const setToken = token => {
     }
 }
 
+// player
+export const setPlayer = player => {
+    return {
+        type: 'PLAYER',
+        username: player.username,
+        id: player.id
+    }
+}
+
+export const clearPlayer = () => {
+    return {
+        type: 'CLEAR'
+    }
+}
+
