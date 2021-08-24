@@ -68,7 +68,7 @@ export default function SignUp() {
     }
 
     return (
-        <div className="auth-container">
+        <div className="auth-element">
             <h1 className="auth-title signup-title">Sign up</h1>
             <form onSubmit={handleSubmit}>
                 <div className="auth-label">
