@@ -13,8 +13,8 @@ export default function Auth() {
     const isLogged = useSelector(state => state.auth.isLogged)
 
     useEffect(() => {
-        if ((!isLogged && match.url === '/logout') ||
-            (isLogged && (match.url === '/login' || match.url === '/signup')))
+        if ((!isLogged && match.url.includes('/logout')) ||
+            (isLogged && (match.url.includes('/login') || match.url.includes('/signup'))))
             history.push("/")
         else seComponentReady(true)
     }, [isLogged, match.url, history, seComponentReady])
@@ -28,7 +28,9 @@ export default function Auth() {
 
     return (
         <div className="auth" onClick={redirectBack}>
-            {match.url === '/login' ? <Login /> : match.url === '/signup' ? <SignUp /> : <Logout />}
+            <div className="auth-container">
+                {match.url.includes('/login') ? <Login /> : match.url.includes('/signup') ? <SignUp /> : <Logout />}
+            </div>
         </div>
     )
 }
