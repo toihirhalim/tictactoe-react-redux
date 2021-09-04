@@ -2,7 +2,7 @@ import React from 'react'
 import Board from './Board'
 import GameMode from './GameMode'
 import Settings from './Settings'
-import Statistics from './Statistics'
+import Statistics from './statistics'
 import Status from './Status'
 import { useSelector } from 'react-redux'
 

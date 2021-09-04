@@ -3,7 +3,6 @@ import GameBar from './GameBar'
 import GeneralStatistics from './GeneralStatistics'
 
 export default function Statistics() {
-
     return (
         <div className="statistics">
             <GeneralStatistics />

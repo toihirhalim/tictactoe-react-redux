@@ -1,15 +1,15 @@
 import React from 'react'
-import Equal from './materials/Equal'
-import Minus from './materials/Minus'
-import Plus from './materials/Plus'
+import Equal from '../materials/Equal'
+import { FaPlusSquare, FaMinusSquare } from 'react-icons/fa'
+import './statistics.css'
 
 export default function GameBarHeader({ wins, losses, draws }) {
     return (
-        <div className="header bold">
+        <div className="game-bar-header bold">
             {
                 wins !== 0 &&
                 <div className="wins" style={{ flex: wins }}>
-                    <Plus />
+                    <FaPlusSquare />
                     <p>{wins}</p>
                 </div>
             }
@@ -25,7 +25,7 @@ export default function GameBarHeader({ wins, losses, draws }) {
             {
                 losses !== 0 &&
                 <div className="losses" style={{ flex: losses }}>
-                    <Minus />
+                    <FaMinusSquare />
                     <p>{losses}</p>
                 </div>
             }
